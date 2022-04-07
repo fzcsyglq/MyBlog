@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Unauthorized Access:: Flask Blog App</title>
+        <link href="/static/css/signup.css" rel="stylesheet">
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="header">
+                <nav>
+                    <ul calss="nav nav-pills pull-right">
+                        <li role="presentation" class="active"><a href="/">Home</a></li>

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Python Flask Bucket List App</title>
+
+        <link href="/static/css/signup.css" rel="sytlesheet">
+        <script src="/static/js/jquery-3.6.0.js"></script>
+        <script src="/static/js/signUp.js"></script>
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="header">
+                <nav>
+                    <ul class="nav nav-pills pull-right">
+                        <li role="presentation"><a href="/">Home</a></li>
+                        <li role="presentation" class="active"><a href="#">Sign In</li>
+                        <li role="presentation"><a href="/showSignUp">Sign Up</a></li>
+                    </ul>
+                </nav>
+                <img src="/static/images/Flask_Icon.jpeg" alt="Flask_Icon.jpeg">
+            </div>
+
+            <div class="jumbotron">
+                <h1>Blog App</h1>
+                <form class="form-signin" action="/validateLogin" method="post">
+                    <lable for="inputEmail" class="sr-only">Email address</lable>
+                    <input type="email" name="inputEmail" id="inputEmail" class="form-control" placeholder="Email address" required autofoces>
+                    <lable for="inputPassword" class="sr-only">Password</lable>
+                    <input type="password" name="inputPassword" id="inputPassword" class="form-control" placeholder="Password" required>
+
+                    <button id="btnSignIn" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                </form>
+            </div>
+
+            <footer class="footer">
+                <p>©fzcsyglq.top 2022</p>
+            </footer>
+
+        </div>
+    </body>
+</html>

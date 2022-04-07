@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Fzcsyglq's Blog'</title>
+        <link href="/static/css/signup.css" rel="stylesheet">
+        <script src="/static/js/jquery-3.6.0.min.js"></script>
+        <script src="/static/js/signUp.js"></script>
+    </head>
+
+    <body>
+        <div class="background"></div>        
+        <div class="container">
+
+            <div class="header">
+                <nav>
+                    <ul>
+                        <li role="presentation"><a href="/">Home</a></li>
+                        <li role="presentation"><a href="/showSignIn">Sign In</a></li>
+                        <li role="presentation"><a href="#">Sign Up</a></li>
+                    </ul>
+                </nav>
+                <img src="/static/images/Flask_Icon.jpg" alt="Flask_Icon.jpg" height="100" width="100">
+            </div>
+
+            <div class="jumbotron">
+                <h1>Fzcsyglq's Blog</h1>
+                <form class="form-signin">
+                    <h1>SIGN UP</h1>
+                    <input type="text" name="inputName" id="inputName" placeholder="Nickname" required autofocus>
+                    <input type="email" name="inputEmail" id="inputEmail" placeholder="Email address" required>
+                    <input type="password" name="inputPassword" id="inputPassword" placeholder="Password" required>
+                    
+                    <button id="btnSignUp" type="submit">Sign up</button>
+                </form>
+            </div>
+            
+            <footer class="footer">
+                <p>©fzcsyglq.top 2022</p>
+            </footer>
+            
+        </div>
+    </body>
+</html>
