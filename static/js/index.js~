@@ -1,0 +1,13 @@
+$(function() {
+    $.ajax({
+        url: '/getBlog',
+        type: 'GET',
+        success: function(res) {
+            var blogObj = JSON.parse(res);
+            $('#listTemplate').tmpl(blogObj).appendTo('#ulist');                        
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+});

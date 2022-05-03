@@ -1,0 +1,58 @@
+.form-sign {
+    width: 380px;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 40px;
+    padding-bottom: 70px;    
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    background: rgb(248, 248, 255, 0.5);
+    border-radius: 10px;
+    text-align: center;
+    
+}
+.form-sign h1 {
+    font-weight: 500;
+}
+.form-sign input {
+    border-radius: 25px;
+    border: 2px solid #3498db;
+    background: none;
+    color: #3498db;
+    font-weight: 500;
+    
+    display: block;
+    text-align: center;
+    margin: auto;
+    width: 300px;
+    height: 45px;
+    margin-top: 15px;
+    outline: none;
+}
+.form-sign input:hover {    
+    width: 320px;
+    height: 46px;
+    margin-left: -10px;
+    margin-top: 14px;
+
+}
+.form-sign button {
+    border-radius: 25px;
+    border: 2px solid #2ecc71;
+    background: none;
+    color: #2ecc71;
+    
+    width: 200px;
+    height: 45px;
+    margin-top: 15px;
+    text-align: center;
+    outline: none;
+    font-weight: 500;
+}
+.form-sign button:hover {
+    background-color: #2ecc71;
+    color: white;
+}

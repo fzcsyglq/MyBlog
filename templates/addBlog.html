@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>fzcsyglq的博客</title>
+        <meta charset="utf-8">
+        <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/static/css/home.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+        <link rel="shortcut icon" type="image/x-icon" href="/static/images/favicon.ico">
+        <script src="/static/js/jquery-3.6.0.min.js"></script>
+        <script src="/static/js/jquery.tmpl.min.js"></script>
+        <script src="/static/js/bootstrap.min.js"></script>
+        <script src="/static/js/widget.js"></script>
+        <script type="text/javascript" src="/static/js/jquery.fileupload.js"></script>
+        <script type="text/javascript" src="/static/js/jquery.fileupload-process.js"></script>
+        <script type="text/javascript" src="/static/js/jquery.fileupload-ui.js"></script>
+
+        <script src="/static/js/addBlog.js"></script>
+    </head>
+
+    <body>
+
+        <div class="container">
+            <div class="row mt-5">
+                <div class="col-sm-2">
+                    <div class="row">
+                        <h3 class="text-center" style="color:#F08080">fzcsyglq</h3></div>
+                </div>
+                <div class="col-sm-10">
+                    <nav>
+                        <ul class="nav nav-tabs nav-pills">
+                            <li role="presentation" class="nav-item">
+                                <a class="nav-link text-primary" href="/">
+                                    <i class="bi bi-house align-middle"></i>
+                                    <span class="align-middle">首页</span>
+                                </a>
+                            </li>
+                            <li role="presentation" class="nav-item">
+                                <a class="nav-link text-primary" href="/userHome">
+                                    <i class="bi bi-person align-middle"></i>
+                                    <span class="align-middle">个人主页</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div >
+            <div class="bg-white bg-opacity-25 rounded p-5 mt-3">
+                <form class="form-horizontal" action="/addBlog" method="post">
+                    <fieldset>
+                        
+                        <legend>创建博客</legend>
+                        
+                        <div class="form-group mt-3">
+                            <label class="form-label" for="txtTitle">标题</label>
+                            <input class="form-control bg-white bg-opacity-50 rounded border-1" id="txtTitle" name="inputTitle" type="text">
+                        </div>
+                        
+                        <div class="form-group mt-3">
+                            <label class="form-label" for="txtPost">内容</label>
+                            <textarea class="form-control bg-white bg-opacity-50 rounded border-1" id="txtPost" name="inputDescription"></textarea>
+                        </div>
+
+                        <div class="form-group mt-3">
+                            <label class="form-label" for="fileupload">图片</label>
+                                <input class="form-control" type="file" id="fileupload" name="file">
+                                <img class="border-0" id="imgUpload" style="max-width:200px; max-height:200px;">
+                            <input type="hidden" name="filePath" id="filePath"></input>
+                        </div>
+
+                        <div class="form-group mt-3">
+                            <input type="checkbox" name="private">标记为私有<i class="bi bi-lock" aria-hidden="true"></i>
+                        </div>
+                        
+                        <div class="from-group mt-3">
+                            <label class="control-label" for="singlebutton"></label>
+                            <input id="singlebutton" class="btn btn-primary" type="submit" value="发表">
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+
+            <footer class="footer">
+                <p>fzcsyglq.top 2022</p>
+            </footer>
+        </div>
+    </body>
+</html>
+
+
+            

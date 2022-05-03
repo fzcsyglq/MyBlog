@@ -1,5 +1,5 @@
 body {
-    background-image: url("../images/Background.jpg");
+    background-image: url("../images/Background.webp");
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -51,7 +51,10 @@ body {
     color: white;
     background: #3498db;
 }
-.header a:visited{
+.header a:link {
+    color: #3498db;
+}
+.header a:visited {
     color: #3498db;
 }
 .header a:hover {

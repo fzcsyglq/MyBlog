@@ -1,25 +1,133 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <title>Python Flask Bucket List App</title>
-        <link href="/static/css/signup.css" rel="stylesheet">
-        <script scr="/static/js/jquery-3.6.0.js"></script>
-    </head>
+        <title>fzcsyglq的博客</title>
+        <meta charset="utf-8">
+        <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+        <link href="/static/css/home.css" rel="stylesheet">
+        <link rel="shortcut icon" type="image/x-icon" href="/static/images/favicon.ico">
+        <script src="/static/js/jquery-3.6.0.min.js"></script>
+        <script src="/static/js/jquery.tmpl.min.js"></script>
+        <script src="/static/js/bootstrap.min.js"></script>
+        <script src="/static/js/widget.js"></script>
+        <script type="text/javascript" src="/static/js/jquery.fileupload.js"></script>
+        
+        <script src="/static/js/userHome.js"></script>        
+        <script id="listTemplate" type="text/x-jquery-tmpl">
+            <li class="list-group-item mt-3 bg-white bg-opacity-50 rounded-pill">
+                <div class="float-start">
+                    <a class="text-muted" href=${IdPath} style="text-decoration:none">${Title}</a>
+                </div>
+                <div class="float-end">
+                    <!--a data-bs-toggle="modal" data-bs-target="#editModal"><span class="glyphicon glyphicon-pencil">edit</span></a-->
+                    <a data-id=${Id} onclick="Edit(this)"><i class="bi bi-pencil align-middle"></i></a>
+                    <a data-id=${Id} onclick="ConfirmDelete(this)"><i class="bi bi-trash"></i></a>
+                </div>
+            </li>
+        </script>
+</head>
 
     <body>
+
         <div class="container">
-            <div class="header">
-                <nav>
-                    <ul class="nav nav-pills pull-right">
-                        <li role="presentation" class="active"><a href="/logout">Logout</a></li>
-                    </ul>
-                </nav>
+            <div class="row mt-5">
+                <div class="col-sm-2">
+                    <div class="row">
+                        <h3 class="text-center" style="color:#F08080">fzcsyglq</h3></div>
+                </div>
+                <div class="col-sm-10">
+                    <nav>
+                        <ul class="nav nav-tabs nav-pills">
+                            <li role="presentation" class="nav-item">
+                                <a class="nav-link text-primary" href="/">
+                                    <i class="bi bi-house align-middle"></i>
+                                    <span class="align-middle">首页</span>
+                                </a>
+                            </li>
+                            <li role="presentation" class="nav-item">
+                                <a class="nav-link text-primary" href="/showAddBlog">
+                                    <i class="bi bi-plus-circle align-middle"></i>
+                                    <span class="align-middle">添加博客</span>
+                                </a>
+                            </li>
+                            <li role="presentation" class="nav-item">                                
+                                <a class="nav-link text-primary" href="/logout">
+                                    <i class="bi bi-box-arrow-left align-middle"></i>
+                                    <span class="align-middle">注销</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel-body">
+                        <ul id="ulist" class="list-group">
+
+                        </ul>
+                    </div>
+                </div>
             </div>
 
-            <div class="jumbotron">
-                <h1>Welcome Home !</h1>
+            <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="editModalLabel">编辑博客</h4>
+                            <button type="button" class="close" data-bs-dismiss="modal"><span aria-hidden="true">×</span></button>
+                        </div>
+                        
+                        <div class="modal-body">
+                            <form role="form">
+                                <div class="form-group">
+                                    <label for="recipient-name" class="form-label">标题</label>
+                                    <input type="text" class="form-control" id="editTitle">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="message-text" class="form-label">内容</label>
+                                    <textarea class="form-control" id="editDescription"></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="fileupload">图片</label>
+                                    <input class="form-control" type="file" id="fileupload" name="file">
+                                    <img class="border-0" id="imgUpload" style="max-width:200px; max-height:200px;">
+                                    <input type="hidden" name="filePath" id="filePath"></input>
+                                </div>
+
+                                <div class="form-group mt-3">
+                                    <input type="checkbox" name="private" id="chkPrivate">标记为私有<i class="bi bi-lock" aria-hidden="true"></i>
+                                </div>
+
+                            </form>
+                        </div>
+                        
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-bs-dismiss="modal">关闭</button>
+                            <button id="btnUpdate" type="button" class="btn btn-primary">更新</button>
+                        </div>
+                    </div>
+                </div>
             </div>
 
+            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header" style="text-align:center;">
+                            <h4 class="modal-title" style="color:red;" id="deleteModalLabel">你将永远删除它 !!</h4>
+                        </div>
+                        
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-bs-dismiss="modal">取消</button>
+                            <button type="button" class="btn btn-primary" onclick="Delete()">删除</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
             <footer class="footer">
                 <p>©fzcsyglq.top 2022</p>
             </footer>
@@ -28,4 +136,4 @@
     </body>
 </html>
 
-                
+
