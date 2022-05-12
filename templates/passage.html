@@ -1,15 +1,44 @@
 <!DOCTYPE html>
 <html>
-
     <head>
         <title>fzcsyglq的博客</title>
         <meta charset="utf-8">
         <link href="/static/css/bootstrap.min.css" rel="stylesheet">
-        <link href="/static/css/home.css" rel="stylesheet">
+        <!--link href="/static/js/node_modules/katex/dist/katex.min.css" rel="stylesheet"-->
+        <link href="/static/js/node_modules/showdown-katex/node_modules/katex/dist/katex.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="/static/js/node_modules/github-markdown-css/github-markdown-light.css">
+        <link href="/static/css/home.css" rel="stylesheet">
         <link rel="shortcut icon" type="image/x-icon" href="/static/images/favicon.ico">
         <script src="/static/js/jquery-3.6.0.min.js"></script>
         <script src="/static/js/bootstrap.min.js"></script>
+        <!--script type="module" scr="https://cdn.jsdelivr.net/npm/markdown-it-katex@2.0.3/index.min.js"></script-->
+        <!--script type="module" scr="https://cdn.jsdelivr.net/npm/markdown-it@10.0.0/dist/markdown-it.min.js"></script-->
+        <!--script src="/static/js/node_modules/markdown-it/dist/markdown-it.min.js"></script-->
+        <!--script src="/static/js/node_modules/markdown-it-katex/index.js"></script-->
+        <!--script src="/static/js/node_modules/katex/dist/katex.min.js"></script-->
+        <script src="/static/js/node_modules/showdown/dist/showdown.min.js"></script>
+        <script src="/static/js/node_modules/showdown-katex/dist/showdown-katex.min.js"></script>
+        <script>
+            $(function(){
+                var title = "# " + {{Title|tojson}};
+                var text = {{Description|tojson}};
+                const converter = new showdown.Converter({
+                    extensions: [                        
+                        showdownKatex({
+                            throwOnError: true,
+                            delimiters: [
+                                {left: "$$", right: "$$", display: true},
+                                {left: "$", right: "$", display: false},
+                            ],                            
+                        }),
+                    ],
+                });
+                console.log(text);
+                $("#title").html(converter.makeHtml(title));
+                $("#description").html(converter.makeHtml(text));
+            })
+        </script>
     </head>
 
     <body>
@@ -48,7 +77,8 @@
                                     <span class="align-middle">{{session["username"]}}的主页</span>
                                 </a>
                             </li>
-                            <li role="presentation" class="nav-item">                                         <a class="nav-link text-primary" href="/logout">
+                            <li role="presentation" class="nav-item">
+                                <a class="nav-link text-primary" href="/logout">
                                     <i class="bi bi-box-arrow-left align-middle"></i>
                                     <span class="align-middle">注销</span>
                                 </a>
@@ -58,8 +88,10 @@
                     </nav>
                 </div>
             </div>
-            <h1>{{Title}}</h1>
-            <p>{{Description}}</p>
+            <div class="mt-5 p-4 rounded-3 markdown-body">
+                <h id="title"></h>
+                <p id="description"></p>
+            </div>
             <footer class="footer">
                 <p>© fzcsyglq.top 2022</p>
             </footer>

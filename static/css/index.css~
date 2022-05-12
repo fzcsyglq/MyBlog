@@ -1,0 +1,8 @@
+#background {
+    max-width: 100%;
+    z-index: 1;
+}
+#headportrait {
+    border-radius: 50%;
+    max-width: 35%;
+}

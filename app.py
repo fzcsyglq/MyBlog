@@ -1,13 +1,19 @@
 #!/usr/bin/python3
-
+# -*- coding: utf-8 -*-
 from flask import *
 from flaskext.mysql import *
 from werkzeug.security import *
 import os
 import uuid
+import logging
 
 app = Flask(__name__)
 mysql = MySQL()
+
+handler = logging.FileHandler("./app.log", encoding="UTF-8")
+logging.getLogger().setLevel(logging.INFO)
+app.logger.addHandler(handler)
+
 
 app.config["MYSQL_DATABASE_USER"] = "root"
 app.config["MYSQL_DATABASE_PASSWORD"] = "link start"
@@ -17,9 +23,12 @@ app.config["MYSQL_DATABASE_LOCALHOST"] = "localhost"
 mysql.init_app(app)
 
 app.config["SECRET_KEY"] = "Why would I tell you my secret key?"
+app.config["UPLOAD_FOLDER"] = "static/Uploads"
+
 
 @app.route("/")
 def main():
+    app.logger.info("ok")
     return render_template("index.html")
 
 @app.route("/showSignUp")
@@ -179,8 +188,7 @@ def getHomeBlog():
         con.close()
         return json.dumps(blogs_dict)
     except Exception as e:
-        print(str(e))
-#        return render_template("error.html", error = str(e))
+        return render_template("error.html", error = str(e))
     
 @app.route("/getBlogById", methods=["POST"])
 def get_BlogById():
@@ -255,19 +263,17 @@ def upload():
     file = request.files["file"]
     extension = os.path.splitext(file.filename)[1]
     f_name = str(uuid.uuid4()) + extension
-    app.config["UPLOAD_FOLDER"] = "static/Uploads"
+
     file.save(os.path.join(app.config["UPLOAD_FOLDER"], f_name))
     return json.dumps({"filename": f_name})
 
 @app.route("/passage/<int:_id>/", methods=["GET"])
 def passage(_id):
-    print(session)
     try:
         con = mysql.connect()
         cursor = con.cursor()
         cursor.callproc("sp_GetBlogById", (_id,))
         result = cursor.fetchall()
-        print(result)
         return render_template("passage.html", Title=result[0][1], Description=result[0][2])
     except Exception as e:
         return render_template("error.html", error = str(e))
